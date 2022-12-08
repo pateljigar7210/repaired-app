@@ -55,14 +55,17 @@ const HomeConnected = () => {
         </View>
         <TouchableHighlight
           style={tw`bg-[#2C73D7] rounded-full w-16 h-16 items-center justify-center absolute left-[40.9%] -top-4.5 z-30`}
+          underlayColor="#2C73D7"
+          activeOpacity={0.6}
+          onPress={() => navigation.navigate("NewRepairs")}
         >
           <Image 
             source={require('../assets/icons/MyRepairs/plus.png')}
             style={tw`w-16 h-16 absolute bottom-0`}
           />
         </TouchableHighlight>
-        <View style={tw`bg-white rounded-full w-17.5 h-16 items-center justify-center absolute left-[40.1%] -top-4.5 z-20`} ></View>
-        <View style={tw`bg-white border border-[#DADADA] rounded-full w-17.5 h-17 items-center justify-center absolute left-[40.1%] -top-5.5`} ></View>
+        <View style={tw`bg-white rounded-full w-17.5 h-16 items-center justify-center absolute left-[40.1%] -top-4.5 z-20`}></View>
+        <View style={tw`bg-white border border-[#DADADA] rounded-full w-17.5 h-17 items-center justify-center absolute left-[40.1%] -top-5.5`}></View>
       </View>
     </SafeAreaView>
   )

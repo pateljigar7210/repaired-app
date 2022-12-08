@@ -17,7 +17,6 @@ const EditAddress = () => {
   const [isEnabled2, setIsEnabled2] = useState(false);
 
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-
   const toggleSwitch2 = () => setIsEnabled2(previousState => !previousState);
 
   return (

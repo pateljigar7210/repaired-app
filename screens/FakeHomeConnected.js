@@ -122,6 +122,9 @@ const FakeHomeConnected = () => {
         </View>
         <TouchableHighlight
           style={tw`bg-[#2C73D7] rounded-full w-16 h-16 items-center justify-center absolute left-[40.9%] -top-4.5 z-30`}
+          underlayColor="#2C73D7"
+          activeOpacity={0.6}
+          onPress={() => navigation.navigate("NewRepairs")}
         >
           <Image 
             source={require('../assets/icons/MyRepairs/plus.png')}
