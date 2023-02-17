@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "repaired-app",
-    "slug": "repaired-app",
+    "name": "YouPick.io",
+    "slug": "isaac-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
@@ -29,6 +29,14 @@
         {
           "merchantIdentifier": "merchant.com.repaired.app",
           "enableGooglePay": true
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow $(PRODUCT_NAME) to access your photos.",
+          "savePhotosPermission": "Allow $(PRODUCT_NAME) to save photos.",
+          "isAccessMediaLocationEnabled": true
         }
       ]
     ]

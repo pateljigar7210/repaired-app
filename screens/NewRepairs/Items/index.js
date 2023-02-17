@@ -104,7 +104,7 @@ const Items = ({
         {item === "Watch" && <Watch details={details.Watch} />}
         {item === "Bracelet" && <Bracelet details={details.Bracelet} />}
         {item === "Earrings" && <Earrings details={details.Earrings} />}
-        {item === "Necklace" && <Necklace details={details.Necklace} />}
+        {item === "Necklace" && <Necklace details={details.Necklace} />}  
         <Image
           source={require('../../../assets/backgroundImages/RepairsItems/bottom-bg.png')}
           style={tw`absolute bottom-15 left-0 right-0 w-full h-58 z-0`}

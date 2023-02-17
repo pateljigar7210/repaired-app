@@ -1,6 +1,10 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
+import FlashMessage from "react-native-flash-message";
+
+import { Provider as StoreProvider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
 import Home from './screens/Home';
 import HomeConnected from './screens/HomeConnected';
@@ -70,13 +74,18 @@ import ThirdStep4 from './screens/NewRepairs/Items/Ring/Title4/ThirdStep';
 import FourthStep4 from './screens/NewRepairs/Items/Ring/Title4/FourthStep';
 import FifthStep4 from './screens/NewRepairs/Items/Ring/Title4/FifthStep';
 import SixthStep4 from './screens/NewRepairs/Items/Ring/Title4/SixthStep';
+import { persistor, store } from './redux/store';
 // Ring - Rhodium Plating
-
+import { useDispatch, useSelector } from "react-redux";
+import MainNavigation from './navigation/MainNavigation';
 
 
 const Stack = createStackNavigator();
 
 export default function App() {
+
+  // const userData = useSelector((state) => state.userReducer.userData);
+  // console.log('userData', userData);
   const [loaded] = useFonts({
     HelveticaNeueBold: require('./assets/fonts/HelveticaNeueBold.ttf'),
     HelveticaNeueLight: require('./assets/fonts/HelveticaNeueLight.ttf'),
@@ -87,73 +96,77 @@ export default function App() {
   if (!loaded) {
     return null;
   }
-  
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Home">
-        {/* Home pages */}
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="HomeConnected" component={HomeConnected} />
-        <Stack.Screen name="FakeHomeConnected" component={FakeHomeConnected} />
-        <Stack.Screen name="SignIn" component={SignIn} />
-        <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name="PhoneVerification" component={PhoneVerification} />
-        <Stack.Screen name="ConfirmationCode" component={ConfirmationCode} />
-        <Stack.Screen name="ResetPassword" component={ResetPassword} />
-        <Stack.Screen name="ResetPassword2" component={ResetPassword2} />
+    <StoreProvider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        {/* <NavigationContainer>
+          <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Home">
 
-        {/* Profile pages */}
-        <Stack.Screen name="Profile" component={Profile} />
-        <Stack.Screen name="AccountSettings" component={AccountSettings} />
-        <Stack.Screen name="PhoneNumber" component={PhoneNumber} />
-        <Stack.Screen name="ShippingAddress" component={ShippingAddress} />
-        <Stack.Screen name="EditAddress" component={EditAddress} />
-        <Stack.Screen name="PaymentMethod" component={PaymentMethod} />
-        <Stack.Screen name="EditCard" component={EditCard} />
-        <Stack.Screen name="NotificationsEmail" component={NotificationsEmail} />
-        <Stack.Screen name="InsurancePolicy" component={InsurancePolicy} />
-        <Stack.Screen name="CancellationPolicy" component={CancellationPolicy} />
-        <Stack.Screen name="HowWeWork" component={HowWeWork} />
-        <Stack.Screen name="ContactUs" component={ContactUs} />
-        <Stack.Screen name="Promos" component={Promos} />
-        <Stack.Screen name="About" component={About} />
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="HomeConnected" component={HomeConnected} />
+            <Stack.Screen name="FakeHomeConnected" component={FakeHomeConnected} />
+            <Stack.Screen name="SignIn" component={SignIn} />
+            <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name="PhoneVerification" component={PhoneVerification} />
+            <Stack.Screen name="ConfirmationCode" component={ConfirmationCode} />
+            <Stack.Screen name="ResetPassword" component={ResetPassword} />
+            <Stack.Screen name="ResetPassword2" component={ResetPassword2} />
 
-        {/* Repair pages */}
-        <Stack.Screen name="Ring" component={Ring} />
+           
+            <Stack.Screen name="Profile" component={Profile} />
+            <Stack.Screen name="AccountSettings" component={AccountSettings} />
+            <Stack.Screen name="PhoneNumber" component={PhoneNumber} />
+            <Stack.Screen name="ShippingAddress" component={ShippingAddress} />
+            <Stack.Screen name="EditAddress" component={EditAddress} />
+            <Stack.Screen name="PaymentMethod" component={PaymentMethod} />
+            <Stack.Screen name="EditCard" component={EditCard} />
+            <Stack.Screen name="NotificationsEmail" component={NotificationsEmail} />
+            <Stack.Screen name="InsurancePolicy" component={InsurancePolicy} />
+            <Stack.Screen name="CancellationPolicy" component={CancellationPolicy} />
+            <Stack.Screen name="HowWeWork" component={HowWeWork} />
+            <Stack.Screen name="ContactUs" component={ContactUs} />
+            <Stack.Screen name="Promos" component={Promos} />
+            <Stack.Screen name="About" component={About} />
 
-        {/* New repair pages */}
-        <Stack.Screen name="NewRepairs" component={NewRepairs} />
-        <Stack.Screen name="Items" component={Items} />
+            <Stack.Screen name="Ring" component={Ring} />
 
-        {/* Ring - Resize */}
-        <Stack.Screen name="Title1" component={Title1} />
-        {/* Ring - Set Stone */}
-        <Stack.Screen name="Title2" component={Title2} />
-        {/*  */}
-        <Stack.Screen name="Title3" component={Title3} />
-        {/*  */}
-        <Stack.Screen name="Title4" component={Title4} />
-        {/*  */}
-        <Stack.Screen name="Title5" component={Title5} />
-        <Stack.Screen name="Title6" component={Title6} />
-        <Stack.Screen name="Title7" component={Title7} />
-        <Stack.Screen name="Title8" component={Title8} />
-        <Stack.Screen name="Title9" component={Title9} />
+       
+            <Stack.Screen name="NewRepairs" component={NewRepairs} />
+            <Stack.Screen name="Items" component={Items} />
 
-        {/* Ring - Resize - Steps */}
-        <Stack.Screen name="SecondStep" component={SecondStep} />
-        <Stack.Screen name="ThirdStep" component={ThirdStep} />
-        <Stack.Screen name="FourthStep" component={FourthStep} />
-        <Stack.Screen name="FifthStep" component={FifthStep} />
-        <Stack.Screen name="SixthStep" component={SixthStep} />
+            <Stack.Screen name="Title1" component={Title1} />
+          
+            <Stack.Screen name="Title2" component={Title2} />
+     
+            <Stack.Screen name="Title3" component={Title3} />
+         
+            <Stack.Screen name="Title4" component={Title4} />
+       
+            <Stack.Screen name="Title5" component={Title5} />
+            <Stack.Screen name="Title6" component={Title6} />
+            <Stack.Screen name="Title7" component={Title7} />
+            <Stack.Screen name="Title8" component={Title8} />
+            <Stack.Screen name="Title9" component={Title9} />
 
-        {/* Ring - Set Stone - Steps */}
-        <Stack.Screen name="SecondStep2" component={SecondStep2} />
-        <Stack.Screen name="ThirdStep2" component={ThirdStep2} />
-        <Stack.Screen name="FourthStep2" component={FourthStep2} />
-        <Stack.Screen name="FifthStep2" component={FifthStep2} />
-        <Stack.Screen name="SixthStep2" component={SixthStep2} />
-      </Stack.Navigator>
-    </NavigationContainer>
+          
+            <Stack.Screen name="SecondStep" component={SecondStep} />
+            <Stack.Screen name="ThirdStep" component={ThirdStep} />
+            <Stack.Screen name="FourthStep" component={FourthStep} />
+            <Stack.Screen name="FifthStep" component={FifthStep} />
+            <Stack.Screen name="SixthStep" component={SixthStep} />
+
+         
+            <Stack.Screen name="SecondStep2" component={SecondStep2} />
+            <Stack.Screen name="ThirdStep2" component={ThirdStep2} />
+            <Stack.Screen name="FourthStep2" component={FourthStep2} />
+            <Stack.Screen name="FifthStep2" component={FifthStep2} />
+            <Stack.Screen name="SixthStep2" component={SixthStep2} />
+          </Stack.Navigator>
+          <FlashMessage position="top" />
+        </NavigationContainer> */}
+        <MainNavigation />
+      </PersistGate>
+    </StoreProvider>
   );
 }

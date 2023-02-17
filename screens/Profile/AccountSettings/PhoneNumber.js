@@ -4,12 +4,36 @@ import tw from "twrnc";
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 import PhoneInput from "react-native-phone-number-input";
+import { User } from '../../api';
 
 const PhoneNumber = () => {
   const navigation = useNavigation();
   const phoneInput = useRef(null);
   const [value, setValue] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   const [formattedValue, setFormattedValue] = useState("");
+  
+  
+  const onSubmit = async () => {
+   
+    try {
+      setIsLoading(true);
+      console.log("=value=",value);
+      let data = {}
+       data.phone = value;
+       console.log("data",data);
+
+      const { message = "Profile successfully updated!" } = await User.updateProfile(data);
+
+      setIsLoading(false);
+      alert(message);
+
+    } catch (error) {
+      console.log("=ooo",error);
+      setIsLoading(false);
+      alert("Error updating profile!");
+    }
+  }
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -61,7 +85,7 @@ const PhoneNumber = () => {
             underlayColor="#0D0C0C"
             activeOpacity={0.8}
             style={tw`py-7`}
-            onPress={() => navigation.goBack()}
+            onPress={() => onSubmit()}
           >
             <Text 
               style={{
