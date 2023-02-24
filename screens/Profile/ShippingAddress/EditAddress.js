@@ -7,6 +7,8 @@ import { useState } from 'react';
 
 const EditAddress = () => {
   const navigation = useNavigation();
+  const [name, setName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [address, setAddress] = useState('');
   const [address2, setAddress2] = useState('');
   const [city, setCity] = useState('');
@@ -18,70 +20,100 @@ const EditAddress = () => {
 
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   const toggleSwitch2 = () => setIsEnabled2(previousState => !previousState);
+  const data=[];
+  function saveAddress(){
+    data.push({name:name,
+      lastName:lastName,
+      address:address,
+      address2:address2,
+      city:city,
+      country:country,
+      zip:zip,
+      phoneNum:phoneNum,
+    })
+   
+    console.log(data);
+    navigation.goBack();
 
+  }
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <SafeAreaView style={tw`bg-white flex-1`}>
         <StatusBar barStyle="dark-content" />
-        <TouchableHighlight 
+        <TouchableHighlight
           style={tw`ml-6 mt-2 w-8 z-50 absolute top-10`}
           onPress={() => navigation.goBack()}
           underlayColor="#FFFFFF"
           activeOpacity={0.5}
         >
-          <Icon 
-            name="chevron-left" 
-            size={36} 
+          <Icon
+            name="chevron-left"
+            size={36}
             color="#282828"
           />
         </TouchableHighlight>
 
         <View style={tw`flex-1 w-10/12 mt-18 mx-auto`}>
-          <Text style={tw`text-3xl font-light mb-16`}>Edit Address</Text>
+          <Text style={tw`text-3xl font-light mb-16`}>Add Address</Text>
           <View style={tw`flex flex-col ml-1`}>
             <View style={tw`flex flex-row items-center mb-7`}>
-              <Text style={tw`text-[#50505A] w-1/2`}>Issac</Text>
-              <Text style={tw`text-[#50505A] w-1/2`}>Sonoda</Text>
-            </View>           
+
+
+            </View>
             <TextInput
               style={tw`mb-7`}
-              placeholder="599 Broadway"
+              placeholder="First Name"
+              placeholderTextColor="#50505A"
+              onChangeText={text => setName(text)
+              }
+              value={name}
+            />
+            <TextInput
+              style={tw`mb-7`}
+              placeholder="Last Name"
+              placeholderTextColor="#50505A"
+              onChangeText={text => setLastName(text)}
+              value={lastName}
+            />
+            <TextInput
+              style={tw`mb-7`}
+              placeholder="Address"
               placeholderTextColor="#50505A"
               onChangeText={text => setAddress(text)}
               value={address}
             />
-            <TextInput 
+            <TextInput
               style={tw`mb-7`}
-              placeholder="Apt 23s"
+              placeholder="Address 2"
               placeholderTextColor="#50505A"
               onChangeText={text => setAddress2(text)}
               value={address2}
             />
-            <TextInput 
+            <TextInput
               style={tw`mb-7`}
               placeholder="City / Town"
               placeholderTextColor="#50505A"
               onChangeText={text => setCity(text)}
               value={city}
             />
-            <TextInput 
+            <TextInput
               style={tw`mb-7`}
-              placeholder="United States"
+              placeholder="State"
               placeholderTextColor="#50505A"
               onChangeText={text => setCountry(text)}
               value={country}
             />
-            <TextInput 
+            <TextInput
               style={tw`mb-7`}
-              placeholder="10009"
+              placeholder="Zip Code"
               placeholderTextColor="#50505A"
               onChangeText={text => setZip(text)}
               value={zip}
               keyboardType="phone-pad"
             />
-            <TextInput 
+            <TextInput
               style={tw`mb-7`}
-              placeholder="(293) 382-2322"
+              placeholder="Contact Number"
               placeholderTextColor="#50505A"
               onChangeText={text => setPhoneNum(text)}
               value={phoneNum}
@@ -92,7 +124,7 @@ const EditAddress = () => {
           <View style={tw`mt-10`}>
             <View style={tw`flex flex-row justify-between items-center mb-2`}>
               <Text style={tw`text-black font-semibold text-xs`}>Set as my preferred shipping address</Text>
-              <Switch 
+              <Switch
                 trackColor={{ false: "#FFFFFF", true: "#3e3e3e" }}
                 thumbColor={isEnabled ? "#FFFFFF" : "#f4f3f4"}
                 ios_backgroundColor="#FFFFFF"
@@ -102,7 +134,7 @@ const EditAddress = () => {
             </View>
             <View style={tw`flex flex-row justify-between items-center`}>
               <Text style={tw`text-black font-semibold text-xs`}>Set as my preferred billing address</Text>
-              <Switch 
+              <Switch
                 trackColor={{ false: "#FFFFFF", true: "#3e3e3e" }}
                 thumbColor={isEnabled2 ? "#FFFFFF" : "#f4f3f4"}
                 ios_backgroundColor="#FFFFFF"
@@ -113,24 +145,24 @@ const EditAddress = () => {
           </View>
         </View>
         <View style={tw`bg-[#0D0C0C] absolute bottom-0 w-full`}>
-        <TouchableHighlight
-          underlayColor="#0D0C0C"
-          activeOpacity={0.8}
-          style={tw`py-7`}
-          onPress={() => navigation.goBack()}
-        >
-          <Text 
-            style={{
-              fontFamily: "HelveticaNeueLight",
-              fontSize: 24,
-              color: "#FFFFFF",
-              textAlign: "center",
-            }}
+          <TouchableHighlight
+            underlayColor="#0D0C0C"
+            activeOpacity={0.8}
+            style={tw`py-7`}
+            onPress={() =>saveAddress()}
           >
-            Save
-          </Text>
-        </TouchableHighlight>
-      </View>
+            <Text
+              style={{
+                fontFamily: "HelveticaNeueLight",
+                fontSize: 24,
+                color: "#FFFFFF",
+                textAlign: "center",
+              }}
+            >
+              Save
+            </Text>
+          </TouchableHighlight>
+        </View>
       </SafeAreaView>
     </TouchableWithoutFeedback>
   )

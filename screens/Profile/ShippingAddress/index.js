@@ -27,13 +27,10 @@ const ShippingAddress = () => {
       <View style={tw`flex-1 w-10/12 mt-18 mx-auto`}>
         <Text style={tw`text-3xl font-light mb-12`}>My Shipping Address</Text>
         <Address 
-          address='599 Broadway, Apt 23s'
-          city='New York, NY, 10009'
+          address='Valsad'
+          city='Valsad, Gujrat, 396001'
           info="My Default Shipping & Billing Address"/>
-        <Address 
-          address='100 Broadway, Apt 23s'
-          city='Brooklyn, NY, 10009'
-        />
+        
       </View>
 
       <View style={tw`bg-[#0D0C0C] absolute bottom-0 w-full`}>
@@ -41,7 +38,7 @@ const ShippingAddress = () => {
           underlayColor="#0D0C0C"
           activeOpacity={0.8}
           style={tw`py-7`}
-          onPress={() => navigation.goBack()}
+          onPress={() => navigation.navigate('EditAddress')}
         >
           <Text 
             style={{

@@ -1,12 +1,9 @@
-import { View, Text, SafeAreaView, Image, StatusBar, TouchableHighlight, ScrollView, TextInput, Alert } from 'react-native'
-import React, { useReducer, useMemo, useEffect, useContext,useState } from 'react';
+import { View, Text, SafeAreaView, Image, StatusBar, TouchableHighlight, ScrollView, TextInput } from 'react-native'
+import React, { useState } from 'react'
 import tw from "twrnc";
-import { choices, user,} from '../api';
-import jobReducer from "../../context"
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
-import { getItem } from '../api/storage';
 
 let radio_props = [
   {label: 'Ring', value: 0 },
@@ -43,91 +40,11 @@ let items_icons = {
     style: tw`w-9.5 h-12.5`
   },  
 }
-
-
-export default function NewRepairs ()
- {
-   
+  
+const NewRepairs = () => {
   const navigation = useNavigation();
   const [value, setValue] = useState(0);
-// const [state, dispatch] = useReducer(
-//   jobReducer,
-//   {
-//     isLoading: true,
-//     choices: null,
-//     user: { name: "" },
-  
-//     jobItems: [], // array of previously added items
-//     gallery: [], // array of images
-//     declaredValue: null, // total of all items for job
-    
-//     location: null, // location object
-//     shippingRate: null, // shippingRate object
-//     shippingPickup: null, // shippingPickup object
 
-//     card: null,
-//     cardLocation: null,
-//   }
-// );
-
-// const jobMemo = useMemo(() => ({
-//   initValues: async () => {
-//     try {
-//       const user = await getItem('user');
-//       console.log(user,"user");
-//       const { items } = await choices.list();
-//       console.log(items,"items");
-      
-//       dispatch({ type: 'INIT_VALUES', items, user });
-//     } catch (error) {
-//       console.log("error loading choices OR user object into context state", error);
-
-//       Alert.alert(
-//         "Problem",
-//         "Failure to connect, please try again.",
-//         [
-//           {
-//             text: "Cancel",
-//             onPress: () => navigation.goBack(),
-//             style: "cancel"
-//           },
-//           { text: "Retry", onPress: () => jobMemo.initValues() }
-//         ]
-//       );
-
-//     }
-//   },
-
-//   // for new services page; replaced setCurrentItem, saveService, saveCurrentItem
-//   finishItem: (item, index = null) => {
-//     if (Number.isInteger(index)) {
-//       console.log("index is true and is being included for dispatch called by finishItem",index);
-//       dispatch({ type: 'UPDATE_ITEM', item, index });
-//     } else {
-//       console.log("index is null and dispatch is type NEW_ITEM");
-//       dispatch({ type: 'NEW_ITEM', item });
-//     }
-//   },
-//   removeItem: index => dispatch({ type: 'REMOVE_ITEM', index }),
-  
-//   // NOTE (2022-08-11): workaround for react-navigation failing to pass params to previous screen 
-//   // function not written yet still trying to get parameter to work other otherwise put the function here
-  
-//   saveGallery: gallery => dispatch({ type: 'SAVE_GALLERY', gallery }),
-//   saveDeclaredValue: declaredValue => dispatch({ type: 'SAVE_DEC_VAL', declaredValue }),
-
-//   saveShippingRate: ({rate, pickup, originId}) => dispatch({ type: 'SAVE_SHIPPING_METHOD', rate, pickup, originId }),
-//   saveLocation: location => dispatch({ type: 'SAVE_LOCATION', location }),
-//   saveCard: card => dispatch({ type: 'SAVE_CARD', card }),
-//   saveCardLocation: location => dispatch({ type: 'SAVE_CARD_LOCATION', location }),
-// }));
-
-
-// // // load choices on startup
-// useEffect(() => { jobMemo.initValues() }, []);
-
-
-  
   return (
     <SafeAreaView style={tw`bg-white flex-1`}>
       <StatusBar barStyle="dark-content" />
@@ -145,8 +62,8 @@ export default function NewRepairs ()
       </TouchableHighlight>
       <ScrollView>
         <View style={tw`flex-1 mx-auto w-10/12 mt-16`}>
-          <Text style={tw`text-4xl font-bold `}>Hello, Isaac</Text>
-          <Text style={tw`text-3xl font-light mt-2`}>Which item would you like to get fixed ?</Text>
+          <Text style={tw`text-4xl font-bold mt-4`}>Hello, Sagar</Text>
+          <Text style={tw`text-3xl font-light mt-8`}>Which item would you like to get fixed ?</Text>
 
           <View style={tw`flex flex-col mt-14`}>
             <RadioForm animation={true}>
@@ -178,13 +95,10 @@ export default function NewRepairs ()
                         onPress={(value) => {setValue(value)}}
                         labelStyle={tw`text-3xl font-light ml-4`}
                       />
-                      
                     </View>
                     <Image
                       style={items_icons[obj.label].style}
                       source={items_icons[obj.label].icon}
-                     //source={{ uri: image }}
-                      //alt={`${title} - ${description}`}
                     />
                   </RadioButton>
                 ))
@@ -218,4 +132,4 @@ export default function NewRepairs ()
   )
 }
 
-//export default NewRepairs
+export default NewRepairs
