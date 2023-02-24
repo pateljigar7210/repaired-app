@@ -4,11 +4,9 @@ import tw from "twrnc";
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 import { Divider } from '@rneui/themed';
-import { useSelector } from "react-redux";
 
 const Profile = () => {
   const navigation = useNavigation();
-  const userData = useSelector((state) => state?.user?.userData?.user);
 
   return (
     <SafeAreaView style={tw`bg-white flex-1`}>
@@ -31,7 +29,7 @@ const Profile = () => {
             source={require('../../assets/icons/Profile/profileIcon.png')}
             style={tw`w-40 h-40`}
             />
-          <Text style={tw`text-3xl font-bold mt-4`}>Hello,{userData?.name}</Text>
+          <Text style={tw`text-3xl font-bold mt-4`}>Hello, Sagar</Text>
 
           <View style={tw`flex flex-col items-center mt-14`}>
             <TouchableHighlight 

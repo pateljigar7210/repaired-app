@@ -12,7 +12,7 @@ export const Address = ({ info, address, city }) => {
   return (
     <View style={tw`mb-7`}>
       <View style={tw`flex flex-row justify-between items-center mb-2`}>
-        <Text style={tw`font-bold text-lg`}>Issac Sonoda</Text>
+        <Text style={tw`font-bold text-lg`}>Sagar Patel</Text>
         <TouchableHighlight
           underlayColor="#FFFFFF"
           activeOpacity={0.8}
